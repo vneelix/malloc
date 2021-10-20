@@ -12,8 +12,9 @@ typedef unsigned long size_t;
 #define NULL (void*)0
 #endif
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memcpy_reverse(void *dest, const void *src, size_t n);
 
 void	*ft_malloc(size_t size);
 
@@ -25,6 +26,18 @@ typedef	struct	node
 	size_t		size;
 	size_t		used;
 }				node;
+
+typedef struct	content_table
+{
+	size_t	size;
+	void	*content;
+}				content_table;
+
+typedef struct	content
+{
+	void	*content;
+}				content;
+
 
 typedef	enum	enum_area {
 	TINY,
