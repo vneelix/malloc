@@ -1,1 +1,1 @@
-clang -g -O0 -Wall -Wextra *.c
+clang -fsanitize=address -g -O0 -Wall -Wextra *.c
