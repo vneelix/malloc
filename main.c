@@ -1,16 +1,28 @@
-#include "ft_malloc.h"
+#include "malloc.h"
 
-char buff[128] = {0};
+#define SZE 49
 
 int	main() {
-	void	*addr[38] = {NULL};
 
-	for (int i = 0; i != 38; i++) {
-		addr[i] = ft_malloc(432);
+	void	*tny[SZE] = {NULL};
+	void	*sml[SZE] = {NULL};
+	void	*lre[SZE] = {NULL};
+
+	for (int i = 0; i != SZE; i++) {
+		tny[i] = malloc(TNY - TNY / 4);
+		sml[i] = malloc(SML - SML / 4);
+		lre[i] = malloc(SML * 1.5);
 	}
 
-	addr[11] = ft_realloc(addr[11], 11);
-	addr[11] = ft_realloc(addr[11], TNY + 256);
+	free(tny[12]);
+
+	int brk = 0;
+	for (int i = 0; i != SZE; i++) {
+		free(tny[i]);
+		if (i == 3) {
+			tny[0] = malloc(123);
+		}
+	}
 
 	return 0;
 }
