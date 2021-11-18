@@ -6,21 +6,20 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 00:33:38 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 01:38:01 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/18 22:58:41 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 static t_page	*find_vacant_page(t_area *area)
 {
 	__uint32_t	i;
 
 	i = 0;
-	while (i != area->page_capacity)
+	while (i != area->page_size)
 	{
-		if (area->page[i] != NULL
-			&& area->page[i]->table_size != area->page[i]->table_capacity)
+		if (area->page[i]->table_size != area->page[i]->table_capacity)
 			return (area->page[i]);
 		i++;
 	}

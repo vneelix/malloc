@@ -6,27 +6,28 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 23:12:00 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 02:06:08 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/19 02:45:02 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 t_area	*g_area = NULL;
 
 static void	free_restricted(t_enum_area type,
 				t_page *page, __uint32_t block_index)
 {
-	t_page	**ptr;
+	__uint32_t	i;
 
 	if (page->table_size != 0)
 		page->table_size--;
 	if (g_area[type].page_size != 1 && page->table_size == 0)
 	{
-		ptr = g_area[type].page;
-		while (*ptr != page)
-			ptr++;
-		*ptr = NULL;
+		i = 0;
+		while (g_area[type].page[i] != page)
+			i++;
+		g_area[type].page[i] = NULL;
+		int64_stack_shift_up(g_area[type].page + i, g_area[type].page_size - i);
 		g_area[type].page_size--;
 		munmap(page, page->sizeof_page);
 		return ;
@@ -67,6 +68,8 @@ void	*malloc(size_t size)
 	if (g_area == NULL)
 		if (init_allocator() != 0)
 			return (NULL);
+	if (size == 0)
+		return (NULL);
 	if (size <= TNY)
 		return (allocate_in_restriced_area(TINY, TNY, size));
 	else if (size <= SML)

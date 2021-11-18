@@ -6,11 +6,11 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:27:39 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 02:00:16 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/18 23:18:28 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 static int	find_into_unrestr(void *addr, t_unrestr_area *area,
 								t_page **page, __uint32_t *block_index)
@@ -38,10 +38,9 @@ static int	find_into_restr(void *addr, t_area *area,
 	__uint32_t	block_idx;
 
 	page_idx = 0;
-	while (page_idx != area->page_capacity)
+	while (page_idx != area->page_size)
 	{
-		if (area->page[page_idx] != NULL
-			&& addr >= area->page[page_idx]->content
+		if (addr >= area->page[page_idx]->content
 			&& addr <= area->page[page_idx]->content_end)
 		{
 			block_idx = 0;

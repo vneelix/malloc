@@ -6,11 +6,11 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:20:16 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 02:04:59 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/18 22:47:53 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 static int	realloc_area_storage(t_unrestr_area *area, size_t storage_capacity)
 {

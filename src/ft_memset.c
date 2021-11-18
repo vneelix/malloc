@@ -6,11 +6,11 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:30:59 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/17 23:29:01 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/18 22:47:21 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 static __uint64_t	generate_qword(__uint8_t c)
 {

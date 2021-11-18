@@ -6,11 +6,11 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 22:07:43 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 01:38:22 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/18 22:47:35 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 static void	*realloc_unrestricted(void *addr,
 				size_t size, t_unrestr_block *block)

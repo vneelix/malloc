@@ -1,38 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   sort_restricted_area.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 22:40:59 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 22:47:14 by vneelix          ###   ########.fr       */
+/*   Created: 2021/11/18 23:31:00 by vneelix           #+#    #+#             */
+/*   Updated: 2021/11/18 23:32:40 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+static void	bubble_iteration(t_area *area, __uint32_t iter)
 {
-	size_t	i;
-	void	*ret;
+	__uint32_t	i;
+	t_page		*page;
 
 	i = 0;
-	ret = dest;
-	while (i != n / sizeof(__uint64_t))
+	while (i != area->page_size - iter - 1)
 	{
-		*(__uint64_t *)dest = *(__uint64_t *)src;
-		dest += sizeof(__uint64_t);
-		src += sizeof(__uint64_t);
+		if ((__uint64_t)area->page[i]->content
+			> (__uint64_t)area->page[i + 1]->content)
+		{
+			page = area->page[i];
+			area->page[i] = area->page[i + 1];
+			area->page[i + 1] = page;
+		}
 		i++;
 	}
+}
+
+void	sort_restricted_area(t_area *area)
+{
+	__uint32_t	i;
+
 	i = 0;
-	while (i != n % sizeof(__uint64_t))
+	while (i != area->page_size - 1)
 	{
-		*(__uint8_t *)dest = *(__uint8_t *)src;
-		dest += sizeof(__uint8_t);
-		src += sizeof(__uint8_t);
+		bubble_iteration(area, i);
 		i++;
 	}
-	return (ret);
 }

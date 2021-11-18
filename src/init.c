@@ -6,11 +6,11 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 23:36:37 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 02:05:53 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/18 22:47:27 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 static void	release_unrestricted_area(t_unrestr_area *area)
 {

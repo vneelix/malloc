@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 22:40:59 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 22:47:14 by vneelix          ###   ########.fr       */
+/*   Created: 2021/11/18 22:19:47 by vneelix           #+#    #+#             */
+/*   Updated: 2021/11/19 02:31:34 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	show_alloc_mem(void)
 {
-	size_t	i;
-	void	*ret;
-
-	i = 0;
-	ret = dest;
-	while (i != n / sizeof(__uint64_t))
-	{
-		*(__uint64_t *)dest = *(__uint64_t *)src;
-		dest += sizeof(__uint64_t);
-		src += sizeof(__uint64_t);
-		i++;
-	}
-	i = 0;
-	while (i != n % sizeof(__uint64_t))
-	{
-		*(__uint8_t *)dest = *(__uint8_t *)src;
-		dest += sizeof(__uint8_t);
-		src += sizeof(__uint8_t);
-		i++;
-	}
-	return (ret);
+	if (g_area == NULL)
+		return ;
+	sort_restricted_area(&g_area[TINY]);
+	sort_restricted_area(&g_area[SMALL]);
+	sort_unrestricted_area((t_unrestr_area *)(g_area + 2));
+	show_alloc_mem_restricted(&g_area[TINY], "TINY");
+	show_alloc_mem_restricted(&g_area[SMALL], "SMALL");
+	show_alloc_mem_unrestricted((t_unrestr_area *)(g_area + 2), "LARGE");
 }

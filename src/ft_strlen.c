@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 22:40:59 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 22:47:14 by vneelix          ###   ########.fr       */
+/*   Created: 2021/11/19 01:06:21 by vneelix           #+#    #+#             */
+/*   Updated: 2021/11/19 01:28:25 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+size_t	ft_strlen(const char *str)
 {
-	size_t	i;
-	void	*ret;
+	const char	*p;
 
-	i = 0;
-	ret = dest;
-	while (i != n / sizeof(__uint64_t))
-	{
-		*(__uint64_t *)dest = *(__uint64_t *)src;
-		dest += sizeof(__uint64_t);
-		src += sizeof(__uint64_t);
-		i++;
-	}
-	i = 0;
-	while (i != n % sizeof(__uint64_t))
-	{
-		*(__uint8_t *)dest = *(__uint8_t *)src;
-		dest += sizeof(__uint8_t);
-		src += sizeof(__uint8_t);
-		i++;
-	}
-	return (ret);
+	p = str;
+	while (*str)
+		str++;
+	return ((size_t)(str - p));
 }

@@ -6,11 +6,11 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 21:34:52 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/18 02:05:35 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/18 22:54:59 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "ft_malloc.h"
 
 static void	map_page(t_page *page)
 {
@@ -77,17 +77,13 @@ int	area_append_page(t_enum_area type,
 						__uint32_t table_size, __uint32_t content_size)
 {
 	t_area	*area;
-	size_t	vacant_page_index;
 
 	area = &g_area[type];
 	if (area->page_size == area->page_capacity)
 		if (realloc_area_storage(area, 32) == -1)
 			return (-1);
-	vacant_page_index = 0;
-	while (area->page[vacant_page_index] != NULL)
-		vacant_page_index++;
-	area->page[vacant_page_index] = init_page(table_size, content_size);
-	if (area->page[vacant_page_index] == NULL)
+	area->page[area->page_size] = init_page(table_size, content_size);
+	if (area->page[area->page_size] == NULL)
 		return (-1);
 	area->page_size++;
 	return (0);
