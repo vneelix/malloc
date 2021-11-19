@@ -1,6 +1,6 @@
 #include "ft_malloc.h"
 
-#define SZE 8
+#define SZE 12
 
 int	main() {
 
@@ -8,18 +8,12 @@ int	main() {
 	void	*sml[SZE] = {NULL};
 	void	*lre[SZE] = {NULL};
 
-	srand(time(NULL));
-
-	tny[0] = malloc(0);
+	for (int i = 0; i != SZE; i++) {
+		tny[i] = malloc(TNY);
+		sml[i] = malloc(SML);
+		lre[i] = malloc(SML + 12);
+	}
 	show_alloc_mem();
-
-	tny[0] = realloc(tny[0], TNY + random() % TNY);
-	show_alloc_mem();
-
-	tny[0] = realloc(tny[0], SML + random() % SML);
-	show_alloc_mem();
-
 	release_allocator();
-
 	return 0;
 }

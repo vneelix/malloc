@@ -6,7 +6,7 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 02:18:14 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/19 02:30:15 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/19 02:57:24 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	fill_header(t_unrestr_area *area, char *title, char **report)
 	ft_memcpy(*report, " : ", 3);
 	*report += 3;
 	ft_memset(buff, 0, 64);
-	uint64_to_hex(area->table[0].ptr, buff);
+	uint64_to_hex((__uint64_t)area->table[0].ptr, buff);
 	temp = ft_strlen(buff);
 	ft_memcpy(*report, buff, temp);
 	*report += temp + 18 - temp;
@@ -38,13 +38,13 @@ static void	fill_block(char **report, t_unrestr_block *b)
 	size_t	temp;
 	char	buff[64];
 
-	uint64_to_hex(b->ptr, buff);
+	uint64_to_hex((__uint64_t)b->ptr, buff);
 	temp = ft_strlen(buff);
 	ft_memcpy(*report, buff, temp);
 	*report += temp + 18 - temp;
 	ft_memcpy(*report, " - ", 3);
 	*report += 3;
-	uint64_to_hex(b->ptr + b->size, buff);
+	uint64_to_hex((__uint64_t)b->ptr + b->size, buff);
 	temp = ft_strlen(buff);
 	ft_memcpy(*report, buff, temp);
 	*report += temp + 18 - temp;
@@ -61,7 +61,6 @@ static void	fill_block(char **report, t_unrestr_block *b)
 static void	fill_report(t_unrestr_area *area, char *title, char *report)
 {
 	size_t	i;
-	size_t	j;
 
 	fill_header(area, title, &report);
 	i = 0;
@@ -85,7 +84,6 @@ static size_t	calc_size(t_unrestr_area *area)
 
 void	show_alloc_mem_unrestricted(t_unrestr_area *area, char *title)
 {
-	size_t	i;
 	size_t	size;
 	char	*report;
 

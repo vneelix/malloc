@@ -6,36 +6,11 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 02:01:52 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/19 02:24:38 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/19 03:04:05 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
-static void	fill_block(char **report, t_block *b)
-{
-	size_t	temp;
-	char	buff[64];
-
-	uint64_to_hex(b->beg, buff);
-	temp = ft_strlen(buff);
-	ft_memcpy(*report, buff, temp);
-	*report += temp + 18 - temp;
-	ft_memcpy(*report, " - ", 3);
-	*report += 3;
-	uint64_to_hex(b->beg + b->size, buff);
-	temp = ft_strlen(buff);
-	ft_memcpy(*report, buff, temp);
-	*report += temp + 18 - temp;
-	ft_memcpy(*report, " : ", 3);
-	*report += 3;
-	uint64_to_dec(b->size, buff);
-	temp = ft_strlen(buff);
-	ft_memcpy(*report, buff, temp);
-	*report += temp + 20 - temp;
-	**report = '\n';
-	*report += 1;
-}
 
 static void	fill_header(t_area *area, char *title, char **report)
 {
@@ -50,10 +25,35 @@ static void	fill_header(t_area *area, char *title, char **report)
 	ft_memcpy(*report, " : ", 3);
 	*report += 3;
 	ft_memset(buff, 0, 64);
-	uint64_to_hex(area->page[0]->content, buff);
+	uint64_to_hex((__uint64_t)area->page[0]->content, buff);
 	temp = ft_strlen(buff);
 	ft_memcpy(*report, buff, temp);
 	*report += temp + 18 - temp;
+	**report = '\n';
+	*report += 1;
+}
+
+static void	fill_block(char **report, t_block *b)
+{
+	size_t	temp;
+	char	buff[64];
+
+	uint64_to_hex((__uint64_t)b->beg, buff);
+	temp = ft_strlen(buff);
+	ft_memcpy(*report, buff, temp);
+	*report += temp + 18 - temp;
+	ft_memcpy(*report, " - ", 3);
+	*report += 3;
+	uint64_to_hex((__uint64_t)b->beg + b->size, buff);
+	temp = ft_strlen(buff);
+	ft_memcpy(*report, buff, temp);
+	*report += temp + 18 - temp;
+	ft_memcpy(*report, " : ", 3);
+	*report += 3;
+	uint64_to_dec(b->size, buff);
+	temp = ft_strlen(buff);
+	ft_memcpy(*report, buff, temp);
+	*report += temp + 20 - temp;
 	**report = '\n';
 	*report += 1;
 }
@@ -91,7 +91,6 @@ static size_t	calc_size(t_area *area)
 
 void	show_alloc_mem_restricted(t_area *area, char *title)
 {
-	size_t	i;
 	size_t	size;
 	char	*report;
 

@@ -6,7 +6,7 @@
 /*   By: vneelix <vneelix@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 23:12:00 by vneelix           #+#    #+#             */
-/*   Updated: 2021/11/19 02:45:02 by vneelix          ###   ########.fr       */
+/*   Updated: 2021/11/19 02:53:44 by vneelix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	free_restricted(t_enum_area type,
 		while (g_area[type].page[i] != page)
 			i++;
 		g_area[type].page[i] = NULL;
-		int64_stack_shift_up(g_area[type].page + i, g_area[type].page_size - i);
+		int64_stack_shift_up((long *)(g_area[type].page + i),
+			g_area[type].page_size - i);
 		g_area[type].page_size--;
 		munmap(page, page->sizeof_page);
 		return ;
